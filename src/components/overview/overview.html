@@ -1,0 +1,44 @@
+<div>
+  <v-layout row wrap>
+    <v-flex>
+      <v-card raised v-for="(item, itemKey) in category.items" :key="itemKey" class="content-card">
+        <v-container fluid grid-list-lg>
+          <v-layout row align-left>
+            <v-flex xs4>
+              <v-card-media :src="item.logo" height="100px" contain align="left"></v-card-media>
+            </v-flex>
+            <v-flex xs9>
+              <div>
+                <div class="headline">{{item.title}}</div>
+                <div class="grey--text">{{item.description}}</div>
+                <div class="grey--text">{{item.isSelected}}</div>
+                <a :href="item.website" class="grey--text">{{item.website }}</a>
+              </div>
+            </v-flex>
+          </v-layout>
+        </v-container>
+        <v-card-actions>
+          <v-switch @click.native="toggleSelection(item)" :disabled="item.isSelected && !item.isSelectedByUser" v-model="item.isSelected" :label="`${item.isSelected ? 'unselect' : 'select'}`"></v-switch>
+          <v-spacer></v-spacer>
+          <v-btn v-if="item.parameters" icon @click.native="item.showParameters = !item.showParameters">
+            <v-icon>{{ item.showParameters ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+          </v-btn>
+        </v-card-actions>
+        <v-slide-y-transition>
+          <v-card-text v-show="item.showParameters">
+            <v-form>
+              <div v-for="(value, key) of item.parameters">
+                <v-text-field :label="key" v-model="item.parameters[key]" required></v-text-field>
+              </div>
+            </v-form>
+          </v-card-text>
+        </v-slide-y-transition>
+      </v-card>
+    </v-flex>
+  </v-layout>
+  <!-- <div >
+    <div v-if="item">
+        {{ item.id }} - {{ item.title }}
+    </div>
+  </div> -->
+</div>
