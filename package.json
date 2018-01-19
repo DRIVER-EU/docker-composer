@@ -4,12 +4,11 @@
     "patch-release": "npm version patch && npm publish && git push --follow-tags",
     "minor-release": "npm version minor && npm publish && git push --follow-tags",
     "major-release": "npm version major && npm publish && git push --follow-tags",
-    "unlink": "yarn unlink @csnext/cs-client && yarn unlink @csnext/cs-core && yarn unlink @csnext/cs-gridstack",
-    "cs": "yarn link @csnext/cs-client && yarn link @csnext/cs-core && yarn link @csnext/cs-gridstack",
+    "unlink": "yarn unlink @csnext/cs-client && yarn unlink @csnext/cs-core",
+    "cs": "yarn link @csnext/cs-client && yarn link @csnext/cs-core",
     "dev": "cross-env NODE_ENV=development nodemon --watch webpack.config.js --exec \"webpack-dev-server\"",
     "build": "cross-env NODE_ENV=production webpack --progress --watch",
-    "start": "concurrently \"yarn cs\" \"yarn dev\" \"cd ../../csnext/csnext && yarn dev\"",
-    "all": "concurrently \"yarn cs\" \"yarn dev\" \"cd ../../csnext/csnext && yarn dev\""
+    "start": "concurrently \"yarn cs\" \"yarn dev\" \"cd ../../csnext && yarn dev\""
   },
   "version": "0.0.1",
   "main": "index.js",

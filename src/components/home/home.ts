@@ -7,11 +7,10 @@ import './home.css';
   template: require('./home.html')
 } as any)
 export default class Home extends WidgetBase {
-  public UpdateContent(content: string) {
-  }
+  public UpdateContent(content: string) {}
 
   public mounted() {
-    if (this.widget.content) {
+    if (this.widget && this.widget.content) {
       this.UpdateContent(this.widget.content);
     }
   }

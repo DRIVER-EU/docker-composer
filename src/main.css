@@ -1,3 +1,7 @@
+.application .theme--light.toolbar, .theme--light .toolbar {
+  background-color: #fff;
+}
+
 .toolbar__title {
   width: 200px;
 }

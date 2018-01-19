@@ -1,7 +1,7 @@
 import { IState } from './classes/state';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
-import { IContent, IContentVM } from './classes/content';
+import { IContent } from './classes/content';
 import { IConfig } from './classes/config';
 import { AppState, CsApp, DatasourceManager } from '@csnext/cs-client';
 import { YamlDatasourceProcessor } from './datasources/yaml-datasource-processor';

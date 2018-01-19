@@ -17,7 +17,7 @@ export default class Overview extends WidgetBase {
   }
 
   public mounted() {
-    if (this.widget.content) {
+    if (this.widget && this.widget.content) {
       this.UpdateContent(this.widget.content);
     }
   }
