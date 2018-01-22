@@ -1,6 +1,45 @@
 <div style="margin: 20px;">
-  Your docker-compose.yml file is ready. Download it by clicking the button below:
-  <v-btn color="blue" @click="prepareDownload()" dark v-bind:href="url" download="docker-compose.yml">
-    <v-icon dark>file_download</v-icon>Download
-  </v-btn>
+  <v-card>
+    <v-card-title>Your docker-compose.yml file is ready.</v-card-title>
+
+    <v-card-actions>
+      <v-btn color="primary" @click.stop="createDockerComposeFile()" dark>
+        <v-icon dark>edit</v-icon>Edit
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+
+  <v-dialog v-model="dialog">
+    <v-card>
+      <v-card-title>
+        <span>Docker-compose result</span>
+        <!-- <v-spacer></v-spacer>
+        <v-menu bottom left>
+          <v-btn icon slot="activator">
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile v-for="(item, i) in items" :key="i" @click="">
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu> -->
+      </v-card-title>
+      <v-card-text>
+        <h3>Update your etc/hosts file</h3>
+        <v-text-field
+          name="input-1"
+          label="docker-compose.yml"
+          id="yaml"
+          :multi-line="true"
+          :auto-grow="true"
+          v-model="yaml"
+        ></v-text-field>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="primary" flat @click.stop="dialog = false">Cancel</v-btn>
+        <v-btn color="primary" flat v-bind:href="url" download="docker-compose.yml">Download</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </div>

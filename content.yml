@@ -234,9 +234,9 @@ services:
     image: confluentinc/cp-zookeeper
     hostname: zookeeper
     ports:
-      - "3500:3500"
+      - "3500:$ZOOKEEPER_CLIENT_PORT"
     environment:
-      ZOOKEEPER_CLIENT_PORT: 3500
+      ZOOKEEPER_CLIENT_PORT: $ZOOKEEPER_CLIENT_PORT
       ZOOKEEPER_TICK_TIME: 2000
 
   broker:
@@ -248,7 +248,7 @@ services:
       - "3501:3501"
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:3500'
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:$ZOOKEEPER_CLIENT_PORT'
       KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:3501'
       KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:3501'
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -267,7 +267,7 @@ services:
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema_registry
       SCHEMA_REGISTRY_LISTENERS: 'http://0.0.0.0:3502'
-      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:3500'
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:$ZOOKEEPER_CLIENT_PORT'
 
   kafka_rest:
     image: confluentinc/cp-kafka-rest
@@ -281,7 +281,7 @@ services:
     environment:
       KAFKA_REST_HOST_NAME: kafka_rest
       KAFKA_REST_BOOTSTRAP_SERVERS: 'PLAINTEXT://broker:3501'
-      KAFKA_REST_ZOOKEEPER_CONNECT: 'zookeeper:3500'
+      KAFKA_REST_ZOOKEEPER_CONNECT: 'zookeeper:$ZOOKEEPER_CLIENT_PORT'
       KAFKA_REST_LISTENERS: 'http://0.0.0.0:8082'
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema_registry:3502'
       KAFKA_CONSUMER_REQUEST_TIMEOUT_MS: 30000
@@ -332,7 +332,7 @@ services:
       - "3504:3504"
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker:3501'
-      CONNECT_ZOOKEEPER_CONNECT: 'zookeeper:3500'
+      CONNECT_ZOOKEEPER_CONNECT: 'zookeeper:$ZOOKEEPER_CLIENT_PORT'
       CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema_registry:3502'
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter

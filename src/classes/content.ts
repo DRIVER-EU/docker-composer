@@ -18,6 +18,8 @@ export interface IContent {
    * included in the docker compose file too.
    */
   depends_on?: string[];
+  /** List of docker image IDs that are required to run this item */
+  services?: string[];
   /** Specific Docker parameters that can be set in the GUI. */
   parameters?: { [key: string]: string };
 }
