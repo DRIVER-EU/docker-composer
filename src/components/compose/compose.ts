@@ -1,12 +1,11 @@
-import { IState } from './../../classes/state';
-import { IConfig } from './../../classes/config';
-import { IContent, IContentVM } from './../../classes/content';
-import Component from 'vue-class-component';
 import Vue from 'vue';
+import Component from 'vue-class-component';
 import * as YAML from 'yamljs';
-import './compose.css';
 import { AppState } from '@csnext/cs-client';
+import { IState } from './../../classes/state';
+import { IContentVM } from './../../classes/content';
 import { IService } from '../../classes/service';
+import './compose.css';
 
 @Component({
   name: 'compose',

@@ -1,8 +1,8 @@
-import { IContentVM, IContentCategory } from './../../classes/content';
 import Component from 'vue-class-component';
 import { WidgetBase, AppState } from '@csnext/cs-client';
-import './overview.css';
+import { IContentVM, IContentCategory } from '../../classes/content';
 import { IState } from '../../classes/state';
+import './overview.css';
 
 @Component({
   name: 'overview',

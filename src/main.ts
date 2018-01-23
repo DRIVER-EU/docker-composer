@@ -1,9 +1,9 @@
-import { IState } from './classes/state';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+import { AppState, CsApp, DatasourceManager } from '@csnext/cs-client';
+import { IState } from './classes/state';
 import { IContent } from './classes/content';
 import { IConfig } from './classes/config';
-import { AppState, CsApp, DatasourceManager } from '@csnext/cs-client';
 import { YamlDatasourceProcessor } from './datasources/yaml-datasource-processor';
 import Overview from './components/overview/overview';
 import Home from './components/home/home';
@@ -22,8 +22,12 @@ const app = AppState.Instance;
 DatasourceManager.add(new YamlDatasourceProcessor());
 
 app.project = {
-  title: 'Composer',
-  logo: 'https://avatars2.githubusercontent.com/u/16935616?s=200&v=4',
+  header: {
+    title: 'Composer',
+    logo: 'https://avatars2.githubusercontent.com/u/16935616?s=200&v=4',
+    breadcrumbs: false,
+    dense: false
+  },
   navigation: {
     style: 'tabs'
   },
