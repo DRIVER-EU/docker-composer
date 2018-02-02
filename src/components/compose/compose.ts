@@ -26,6 +26,7 @@ export default class Compose extends Vue {
     const serviceIDs: string[] = [];
     const components: IContentVM[] = [];
     const parameters: { [parameter: string]: string | number } = {};
+
     for (const cKey in state.config.content) {
       if (!state.config.content.hasOwnProperty(cKey)) { continue; }
       const items = state.config.content[cKey].items;
@@ -56,24 +57,18 @@ export default class Compose extends Vue {
       }
       return yaml;
     };
-    console.log('Components');
-    console.log(components);
-    console.log('Services');
-    console.log(serviceIDs);
 
-    const services: IService[] = [];
+    const services: { [key: string]: IService} = {};
     for (const key in state.config.services) {
       if (!state.config.services.hasOwnProperty(key) || serviceIDs.indexOf(key) < 0) { continue; }
-      services.push(state.config.services[key]);
+      services[key] = state.config.services[key];
     }
     const dockerFile = {
       version: '2',
       services: services
     };
     this.yaml = applyParameters(YAML.stringify(dockerFile, 5, 2));
-    const blob = new Blob([this.yaml], { type: 'application/text' });
-    // const json = JSON.stringify(data);
-    // const blob = new Blob([json], { type: 'application/json' });
+    const blob = new Blob(['---\n' + this.yaml], { type: 'application/text' });
     this.url = URL.createObjectURL(blob);
   }
 
