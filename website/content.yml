@@ -1,0 +1,359 @@
+content:
+  core:
+    title: Core services
+    description: Most of the time, you will need these services.
+    logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+    items:
+      kafka:
+        title: DRIVER+ test-bed core
+        description: >
+          The test-bed allows you to trial and test different solutions in the
+          crisis-management domain. It consists of a complete setup of Apache
+          Kafka, and some additional tooling, such as the REST interface,
+          schema registry and UI, and topics UI.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://driver-project.eu
+        depends_on:
+        services:
+          - zookeeper
+          - broker
+          - schema_registry
+          - kafka_schema_registry_ui
+          - kafka_topics_ui
+          - kafka_rest
+        parameters:
+          ZOOKEEPER_CLIENT_PORT: 3500
+          KAFKA_BROKER_PORT: 3501
+          SCHEMA_REGISTRY_PORT: 3502
+          SCHEMA_REGISTRY_UI_PORT: 8000
+          KAFKA_TOPICS_PORT: 3600
+          KAFKA_REST_PORT: 8082
+      connect:
+        title: Kafka Connect
+        description: >
+          Kafka Connect is a framework included in Apache Kafka that integrates Kafka with other systems. Its purpose is to make it easy to add new systems to your scalable and secure stream data pipelines.
+
+          To copy data between Kafka and another system, users instantiate Kafka Connectors for the systems they want to pull data from or push data to. Source Connectors import data from another system (e.g. a relational database into Kafka) and Sink Connectors export data (e.g. the contents of a Kafka topic to an HDFS file).
+        logo: https://www.confluent.io/wp-content/themes/confluent/assets/images/confluent-logo-300.png
+        website: https://www.confluent.io/product/connectors/
+        depends_on:
+          - kafka
+        services:
+          - connect
+          - kafka_connect_ui
+        parameters:
+          KAFKA_CONNECT_PORT: 3504
+          KAFKA_CONNECT_UI_PORT: 3602
+  support:
+    items:
+      scenario_manager:
+        title: Scenario Manager
+        description: >
+          The Scenario Manager allows you to start/stop/pause different scenario's. In a scenario, you can perform
+          simple actions, like sending a message, but it also allows for more complex branching and starting or stopping
+          sub-scenarios.
+
+          Additionally, it can send control messages to different simulators, such as starting a traffic simulation, a
+          flooding, forest fire, or simply creating a flood of social media messages.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://driver-project.eu
+        depends_on:
+          - kafka
+        parameters:
+          SCENARIO_MANAGER_PORT: 3701
+      observer:
+        title: Online Observer Support tool
+        description: >
+          Using our Online Observer Support, observers are instructed and guided what to look for during a trial. They
+          receive information about the actual scenario, and what to look for specifically. You can create templates
+          to facilitate entering useful observations.
+
+          As a trial manager, you can follow the observations in real-time using the OOS management tool,
+          so you can use it to steer the scenario in a direction that is most beneficial for your trial. It also
+          allows you to communicate with your observers, or add specific observation (templates) in real-time.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://driver-project.eu
+        depends_on:
+          - kafka
+        parameters:
+          OOS_PORT: 3710
+          OOS_MANAGER_PORT: 3711
+      aar:
+        title: After Action Review tool
+        description: >
+          The AAR allows you to review the past trial, and combine it with actual observations.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://driver-project.eu
+        depends_on:
+          - kafka
+        parameters:
+          AAR_PORT: 3720
+      admin:
+        title: Administrator Management tool
+        description: >
+          As a trial manager, you want to know that all systems are connected and running. You can use this admin
+          tool for that.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://driver-project.eu
+        depends_on:
+          - kafka
+        parameters:
+          ADMIN_MANAGER_PORT: 3730
+      mit:
+        title: Message injection and debugging tool
+        description: >
+          The Message Injection and debugging tool is for solution developers or IT administrators/devops. It allows you
+          to analyze the logs and send specific messages to your solution.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://driver-project.eu
+        depends_on:
+          - kafka
+        parameters:
+          SCENARIO_MANAGER_PORT: 3740
+  simulations:
+    title: Simulations
+    items:
+      sumo:
+        title: SUMO Traffic simulator
+        description: >
+          A generic traffic simulator that can help you get a realistic impression of the traffic during
+          a crisis. It can evacuate areas, or you can block certain roads, e.g. after a flooding, and the
+          traffic will be re-routed.
+        logo: http://www.dlr.de/ts/en/Portaldata/16/Resources/Projekte/SUMO/SUMO-Benutzeroberflaeche.jpg
+        website: http://www.dlr.de/ts/en/desktopdefault.aspx/tabid-9883/16931_read-41000/
+        depends_on:
+        services:
+          - kafka
+        parameters:
+          SUMO_PORT: 3800
+      flood:
+        title: Flooding simulator
+        description: >
+          A generic flooding simulator that can help you get a realistic impression of the water during
+          a crisis.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://hkv.nl/
+        depends_on:
+        services:
+          - kafka
+        parameters:
+          SUMO_PORT: 3810
+      firesim:
+        title: A fake fire simulator
+        description: Point me to a location and I wil lite it up, free of charge
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://driver-project.eu
+        depends_on:
+        services:
+          - kafka
+        parameters:
+          FIRESIM_PORT: 3820
+  utils:
+    title: Utilities
+    description: These can be practical when starting to integrate existing applications to the test-bed
+    logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+    items:
+      mbtiles:
+        title: MBtiles service
+        description: The MBtiles service allows you to host your own mbtiles, e.g. with OpenStreetMap data.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://driver-project.eu
+        depends_on:
+        services:
+          - mbtiles
+        parameters:
+          MBTILES_PORT: 3900
+      wms:
+        title: WMS-lite service
+        description: WMS is a well known GIS standard to display overlays on maps. This WMS lite service allows you to view GeoJSON messages as WMS.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://driver-project.eu
+        depends_on:
+        services:
+          - kafka
+        parameters:
+          WMS_LITE_PORT: 3901
+  solutions:
+    title: Solutions
+    items:
+      cscop:
+        title: CommonSense COP tool
+        description: >
+          The Common Operational Picture tool offers you a great overview of the situation. You can use it to view
+          and create Common Alerting Protocol (a.k.a. CAP) messages, GeoJSON data, WMS, and much more. It also has
+          extensive filtering and highlighting capabilities, a timeline component, and, optionally, agenda and slide
+          components, to name but a few.
+        logo: assets/csCOP.png
+        website: http://github.com/TNOCS/csWeb
+        depends_on:
+          - kafka
+        services:
+          - cscop
+        parameters:
+          CSCOP_PORT: 8000
+      gmv:
+        title: GMV COP tool [COMMERCIAL]
+        description: >
+          The Common Operational Picture tool offers you a great overview of the situation. You can use it to view
+          and create Common Alerting Protocol (a.k.a. CAP) messages, GeoJSON data, WMS, and much more. It also has
+          extensive filtering and highlighting capabilities, a timeline component, and, optionally, agenda and slide
+          components, to name but a few.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://gmv.com
+        depends_on:
+          - kafka
+        services:
+          - cscop
+        parameters:
+          GMVCOP_PORT: 8010
+  data:
+    title: Data sets
+    items:
+      thehague:
+        title: The Hague data set
+        description: >
+          This data sets contains public data that can be used as input for your trial, like maps,
+          census information, map layers with locations of schools, police stations, fire stations, hospitals,
+          care institutions, etc.
+
+          Many of our tools can use this to provide extra background information to the trial.
+
+
+
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    hostname: zookeeper
+    ports:
+      - "$ZOOKEEPER_CLIENT_PORT:3500"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: $ZOOKEEPER_CLIENT_PORT
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    image: confluentinc/cp-kafka
+    hostname: broker
+    depends_on:
+      - zookeeper
+    ports:
+      - "$KAFKA_BROKER_PORT:3502"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:$ZOOKEEPER_CLIENT_PORT'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:$KAFKA_BROKER_PORT'
+      KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:$KAFKA_BROKER_PORT'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
+      KAFKA_MESSAGE_MAX_BYTES: 100000000
+      KAFKA_REPLICA_FETCH_MAX_BYTES: 100000000
+
+  schema_registry:
+    image: confluentinc/cp-schema-registry
+    hostname: schema_registry
+    depends_on:
+      - zookeeper
+      - broker
+    ports:
+      - "$SCHEMA_REGISTRY_PORT:3502"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema_registry
+      SCHEMA_REGISTRY_LISTENERS: 'http://0.0.0.0:$SCHEMA_REGISTRY_PORT'
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:$ZOOKEEPER_CLIENT_PORT'
+
+  kafka_rest:
+    image: confluentinc/cp-kafka-rest
+    hostname: kafka_rest
+    depends_on:
+      - zookeeper
+      - schema_registry
+      - broker
+    ports:
+      - "$KAFKA_REST_PORT:8082"
+    environment:
+      KAFKA_REST_HOST_NAME: kafka_rest
+      KAFKA_REST_BOOTSTRAP_SERVERS: 'PLAINTEXT://broker:$KAFKA_BROKER_PORT'
+      KAFKA_REST_ZOOKEEPER_CONNECT: 'zookeeper:$ZOOKEEPER_CLIENT_PORT'
+      KAFKA_REST_LISTENERS: 'http://0.0.0.0:$KAFKA_REST_PORT'
+      KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema_registry:$SCHEMA_REGISTRY_PORT'
+      KAFKA_CONSUMER_REQUEST_TIMEOUT_MS: 30000
+      KAFKA_REST_ACCESS_CONTROL_ALLOW_METHODS: 'GET,POST,PUT,DELETE,OPTIONS'
+      KAFKA_REST_ACCESS_CONTROL_ALLOW_ORIGIN: '*'
+
+  kafka_topics_ui:
+    image: landoop/kafka-topics-ui
+    hostname: kafka_topics_ui
+    depends_on:
+      - kafka_rest
+    ports:
+      - "$KAFKA_TOPICS_UI:8000"
+    environment:
+      KAFKA_REST_PROXY_URL: 'http://kafka_rest:$KAFKA_REST_PORT'
+      PROXY: 'true'
+
+  kafka_schema_registry_ui:
+    image: landoop/schema-registry-ui
+    hostname: kafka_schema_registry_ui
+    depends_on:
+      - schema_registry
+    ports:
+      - "$SCHEMA_REGISTRY_UI_PORT:8000"
+    environment:
+      SCHEMAREGISTRY_URL: 'http://schema_registry:$SCHEMA_REGISTRY_PORT'
+      PROXY: 'true'
+
+  connect:
+    image: confluentinc/cp-kafka-connect
+    hostname: connect
+    depends_on:
+      - zookeeper
+      - broker
+      - schema_registry
+    ports:
+      - "$KAFKA_CONNECT_PORT:3504"
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: 'broker:$KAFKA_BROKER_PORT'
+      CONNECT_ZOOKEEPER_CONNECT: 'zookeeper:$ZOOKEEPER_CLIENT_PORT'
+      CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema_registry:$SCHEMA_REGISTRY_PORT'
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema_registry:$SCHEMA_REGISTRY_PORT'
+      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+      CONNECT_REST_PORT: $KAFKA_CONNECT_PORT
+      CONNECT_GROUP_ID: compose-connect-group
+      CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_FLUSH_INTERVAL_MS: 10000
+      CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+
+  kafka_connect_ui:
+    image: landoop/kafka-connect-ui
+    hostname: kafka_connect_ui
+    depends_on:
+      - connect
+    ports:
+      - "$KAFKA_CONNECT_UI_PORT:8000"
+    environment:
+      CONNECT_URL: 'http://connect:$KAFKA_CONNECT_PORT'
+      PROXY: 'true'
+
+  cscop:
+    build: https://github.com/DRIVER-EU/csCOP.git#test-bed:website
+    hostname: cscop
+    depends_on:
+      - schema_registry
+      - zookeeper
+      - broker
+    ports:
+      - "$CSCOP_PORT:8003"
+    volumes:
+      - ./config/cscop/:/src/config/
+    environment:
+      CSCOP_PORT: $CSCOP_PORT
+
+
