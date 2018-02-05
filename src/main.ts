@@ -60,7 +60,7 @@ app.project = {
   },
   theme: {
     colors: {
-      primary: 'orange',
+      primary: '#FDB836',
       secondary: '#e5e9ea',
       accent: '#82B1FF',
       error: '#FF5252',

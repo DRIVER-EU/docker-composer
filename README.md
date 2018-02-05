@@ -25,7 +25,7 @@ Run `yarn build` and copy the newly created bundle in the `dist` folder (and `co
 
 # About the application structure
 
-The `content.yml` file contains the relevant input, i.e. upon loading the application in `app.ts`, the `content.yml` datasource is loaded, and each entry is converted to a tab in the application.
+The `content.yml` file contains the relevant input, i.e. upon loading the application in `main.ts`, the `content.yml` datasource is loaded, and each entry is converted to a tab in the application.
 
 The `content.yml` file is actually nothing more than a `Docker-compose.yml` file, supplemented with a description of the services, i.e. the `content` part of this file describes the items that you can select in the web application, and each piece consists of one or more Docker images. Furthermore, the content may have a `depends_on` property, which indicates that there is a dependency on another content item. Finally, each content item may have parameters, for example to specify its port, and in the generated `Docker-compose.yml` file, these parameters are replaced with the supplied input. For example, the parameter `KAFKA_PORT` is replaced by its default value, e.g. `3052` everywhere where we have used the `$KAFKA_PORT` string.
 
