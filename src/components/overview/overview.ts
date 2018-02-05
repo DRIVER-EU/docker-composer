@@ -1,3 +1,4 @@
+import { ContentVM } from './../../classes/content';
 import Component from 'vue-class-component';
 import { WidgetBase, AppState } from '@csnext/cs-client';
 import { IContentVM, IContentCategory } from '../../classes/content';
@@ -13,7 +14,12 @@ export default class Overview extends WidgetBase {
 
   public UpdateContent(n: IContentCategory) {
     if (!n) { return; }
-    this.category = n;
+    this.category = { ...n };
+    if (!this.category.items) { return; }
+    for (let key in this.category.items) {
+      if (!this.category.items.hasOwnProperty(key)) { continue; }
+      this.category.items[key] = new ContentVM(this.category.items[key]);
+    }
   }
 
   public mounted() {

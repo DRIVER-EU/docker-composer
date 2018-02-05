@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -11,18 +11,19 @@ module.exports = {
     filename: 'build.js'
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.ts$/,
         exclude: /node_modules/,
         loader: 'awesome-typescript-loader',
         options: {
-          appendTsSuffixTo: [/\.vue$/]
+          appendTsSuffixTo: [ /\.vue$/ ]
         }
       },
       {
         test: /\.html$/,
         loader: 'raw-loader',
-        exclude: ['./src/index.html']
+        exclude: [ './src/index.html' ]
       },
       {
         test: /\.vue$/,
@@ -34,7 +35,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [{
+        use: [
+          {
             loader: 'style-loader'
           },
           {
@@ -56,14 +58,14 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.vue', '.ts', '.js'],
+    extensions: [ '.vue', '.ts', '.js' ],
     alias: {
-      'Vue': path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js'),
-      'vue': path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js'),
-      'Vuetify': path.resolve(__dirname, 'node_modules/vuetify/dist/vuetify.js'),
-      'd3': path.resolve(__dirname, 'node_modules/d3/d3.min.js'),
-      'crossfilter': path.resolve(__dirname, 'node_modules/crossfilter2/crossfilter.min.js'),
-      'dc': path.resolve(__dirname, 'node_modules/dc/dc.min.js')
+      Vue: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js'),
+      vue: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js'),
+      Vuetify: path.resolve(__dirname, 'node_modules/vuetify/dist/vuetify.js'),
+      d3: path.resolve(__dirname, 'node_modules/d3/d3.min.js'),
+      crossfilter: path.resolve(__dirname, 'node_modules/crossfilter2/crossfilter.min.js'),
+      dc: path.resolve(__dirname, 'node_modules/dc/dc.min.js')
     }
   },
   devServer: {
@@ -74,17 +76,15 @@ module.exports = {
   performance: {
     hints: false
   },
-  plugins: [
-
-  ],
+  plugins: [],
   devtool: '#eval-source-map',
   node: {
-    fs: "empty"
+    fs: 'empty'
   }
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+  module.exports.devtool = '#source-map';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
@@ -104,5 +104,5 @@ if (process.env.NODE_ENV === 'production') {
       reportFilename: 'reports/report.html',
       generateStatsFile: true
     })
-  ])
+  ]);
 }

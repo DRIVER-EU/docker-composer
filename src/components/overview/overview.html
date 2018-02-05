@@ -11,13 +11,14 @@
               <div>
                 <div class="headline">{{item.title}}</div>
                 <div class="grey--text">{{item.description}}</div>
-                <a :href="item.website" class="grey--text">{{item.website }}</a>
+                <a :href="item.website" class="grey--text">{{item.website}}</a>
+                <div v-if="item.isDisabled" class="red--text">NOT AVAILABLE YET - EXPECTED SOON</div>
               </div>
             </v-flex>
           </v-layout>
         </v-container>
         <v-card-actions>
-          <v-switch @click.native="toggleSelection(item)" :disabled="item.isSelected && !item.isSelectedByUser" v-model="item.isSelected" :label="`${item.isSelected ? 'unselect' : 'select'}`"></v-switch>
+          <v-switch @click.native="toggleSelection(item)" :disabled="item.isDisabled" v-model="item.isSelected" :label="`${item.isSelected ? 'unselect' : 'select'}`"></v-switch>
           <v-spacer></v-spacer>
           <v-btn v-if="item.parameters" icon @click.native="item.showParameters = !item.showParameters">
             <v-icon>{{ item.showParameters ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
