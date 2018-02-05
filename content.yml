@@ -114,7 +114,7 @@ content:
     title: Simulations
     items:
       sumo:
-        title: SUMO Traffic simulator
+        title: SUMO Traffic simulator [DLR]
         description: >
           A generic traffic simulator that can help you get a realistic impression of the traffic during
           a crisis. It can evacuate areas, or you can block certain roads, e.g. after a flooding, and the
@@ -122,32 +122,19 @@ content:
         logo: http://www.dlr.de/ts/en/Portaldata/16/Resources/Projekte/SUMO/SUMO-Benutzeroberflaeche.jpg
         website: http://www.dlr.de/ts/en/desktopdefault.aspx/tabid-9883/16931_read-41000/
         depends_on:
-        services:
-          - kafka
+          - core
         parameters:
           SUMO_PORT: 3800
-      flood:
-        title: Flooding simulator
+      crowd:
+        title: CROWD Simulator [THALES]
         description: >
-          A generic flooding simulator that can help you get a realistic impression of the water during
-          a crisis.
+          A generic crowd simulator that can help you get a realistic impression of the crowd movements.
         logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
-        website: http://hkv.nl/
+        website: http://thalesgroup.com/
         depends_on:
-        services:
-          - kafka
+          - core
         parameters:
-          SUMO_PORT: 3810
-      firesim:
-        title: A fake fire simulator
-        description: Point me to a location and I wil lite it up, free of charge
-        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
-        website: http://driver-project.eu
-        depends_on:
-        services:
-          - kafka
-        parameters:
-          FIRESIM_PORT: 3820
+          CROWD_SIM_PORT: 3810
   utils:
     title: Utilities
     description: These can be practical when starting to integrate existing applications to the test-bed
@@ -155,24 +142,44 @@ content:
     items:
       mbtiles:
         title: MBtiles service
-        description: The MBtiles service allows you to host your own mbtiles, e.g. with OpenStreetMap data.
+        description: >
+          The MBtiles service allows you to host your own MBtiles, e.g. with OpenStreetMap data.
+
+          It opens one or more MBtiles files and serves them via express. Optionally, if available,
+          it can also serve UTF grid files. By default, it creates 10 concurrent connections to each MBtiles file.
+
+          MBtiles is a specification for storing tiled map data in SQLite databases for immediate usage
+          and for transfer. MBTiles files, known as tilesets, must implement the specification below to
+          ensure compatibility with devices. are a convenient way to package.
+
+          There are several ways to create MBtiles files. You can use TileMill to create your own map and
+          export it as MBtiles file. See also this tutorial. Alternatively, you can use MapTiler to create
+          them from a number of sources.
         logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
-        website: http://driver-project.eu
-        depends_on:
+        website: https://github.com/DRIVER-EU/test-bed-mbtiles-service
         services:
-          - mbtiles
+          - mbtilesserver
         parameters:
-          MBTILES_PORT: 3900
+          MBTILES_PORT: 3344
       wms:
         title: WMS-lite service
-        description: WMS is a well known GIS standard to display overlays on maps. This WMS lite service allows you to view GeoJSON messages as WMS.
+        description: >
+          WMS is a well known GIS standard to display overlays on maps. This WMS lite service allows you to
+          view GeoJSON messages as WMS.
+
+          WMS-LITE is a simple NODE (v8.9) service that you can easily run locally and which serves a folder
+          of GIS files as WMS v1.1.1. When a file is changed, the map will be renewed on the next refresh.
+          Besides being a WMS server, it can also act as a tile services, serving tiles using the slippy map
+          tile layer protocol (http://HOST:PORT/layer1,layer2,layer3/zoom/x/y.png). Furthermore, an Apache
+          Kafka connector can be enabled, which can extract files from Kafka and save them in the local data folder.
+
+          Each GIS file that is served needs to have a specific Mapnik XML configuration: For examples, see the styles folder.
         logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
-        website: http://driver-project.eu
-        depends_on:
+        website: https://github.com/DRIVER-EU/test-bed-wms-service
         services:
-          - kafka
+          - wmsserver
         parameters:
-          WMS_LITE_PORT: 3901
+          WMS_PORT: 3355
   solutions:
     title: Solutions
     items:
@@ -202,8 +209,6 @@ content:
         website: http://gmv.com
         depends_on:
           - kafka
-        services:
-          - cscop
         parameters:
           GMVCOP_PORT: 8010
   data:
@@ -356,4 +361,22 @@ services:
     environment:
       CSCOP_PORT: $CSCOP_PORT
 
+  mbtilesserver:
+    build: https://github.com/DRIVER-EU/test-bed-mbtiles-service.git#0.0.2
+    hostname: mbtilesserver
+    ports:
+      - "$MBTILES_PORT:3344"
+    volumes:
+      - ./mbtiles/:/src/mbtiles/
+    environment:
+      MBTILES_PORT: $MBTILES_PORT
 
+  wmsserver:
+    build: https://github.com/DRIVER-EU/test-bed-wms-service.git#v0.0.2
+    hostname: wmsserver
+    ports:
+      - "$WMS_PORT:3355"
+    environment:
+      WMS_PORT: $WMS_PORT
+      GDAL_DATA: '/usr/share/gdal/2.2'
+      PROJ_LIB: './src/nad'
