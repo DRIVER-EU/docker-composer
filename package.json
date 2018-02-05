@@ -11,7 +11,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --watch",
     "all": "concurrently \"yarn cs\" \"yarn dev\" \"cd ../../csnext && yarn dev\""
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "repository": "https://github.com/DRIVER-EU/docker-composer.git",
   "author": "erik.vullings <erik.vullings@gmail.com>",

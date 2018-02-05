@@ -1,6 +1,6 @@
 # Docker-composer
 Single Page Application to help you create your personalized DRIVER+ test-bed, based on Apache Kafka.
-A preview is available [here](https://driver-eu.github.io/docker-composer).
+A preview is available at [https://driver-eu.github.io/docker-composer](https://driver-eu.github.io/docker-composer).
 
 # Introduction
 The Driver+ test-bed combines many different Docker images into one Docker-compose file. To manage the complexity, the GUI helps you select only the services that you need, and creates a personalized Docker-compose file for you.
@@ -18,6 +18,10 @@ And install the dependencies and run the development server:
 npm i
 npm run start
 ```
+
+## Production build
+
+Run `yarn build` and copy the newly created bundle in the `dist` folder (and `content.yml`) to the `docs` folder. The `docs` folder is automatically visible at [https://driver-eu.github.io/docker-composer](https://driver-eu.github.io/docker-composer).
 
 # About the application structure
 
