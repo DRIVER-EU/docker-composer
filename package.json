@@ -18,6 +18,8 @@
   "license": "MIT",
   "dependencies": {
     "@csnext/cs-client": "^0.0.8",
+    "@csnext/cs-core": "^0.0.8",
+    "@types/geojson": "^7946.0.1",
     "@types/node": "^8.5.9",
     "axios": "^0.17.1",
     "lodash": "^4.17.5",
