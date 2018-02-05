@@ -1,7 +1,7 @@
-import { IContent, IContentCategory } from './content';
+import { IContentCategory } from './content';
 import { IService } from './service';
 
 export interface IConfig {
-    content: {[id:string] : IContentCategory};
-    services: {[id:string] : IService};
+  content: { [id: string]: IContentCategory };
+  services: { [id: string]: IService };
 }
