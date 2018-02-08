@@ -12,7 +12,7 @@
                 <div class="headline">{{item.title}}</div>
                 <div class="grey--text">{{item.description}}</div>
                 <a :href="item.website" class="grey--text">{{item.website}}</a>
-                <div v-if="item.isDisabled" class="red--text">NOT AVAILABLE YET - EXPECTED SOON</div>
+                <div v-if="item.unavailable" class="red--text">NOT AVAILABLE YET - EXPECTED SOON</div>
               </div>
             </v-flex>
           </v-layout>

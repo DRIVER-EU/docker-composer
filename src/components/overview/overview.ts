@@ -18,7 +18,7 @@ export default class Overview extends WidgetBase {
     if (!this.category.items) { return; }
     for (let key in this.category.items) {
       if (!this.category.items.hasOwnProperty(key)) { continue; }
-      this.category.items[key] = new ContentVM(this.category.items[key]);
+      this.category.items[key] = new ContentVM(this.category.items[key] as IContentVM);
     }
   }
 
