@@ -4972,9 +4972,9 @@ typescript@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.1.tgz#bb3682c2c791ac90e7c6210b26478a8da085c359"
 
-uglify-es@^3.3.4, uglify-es@mishoo/UglifyJS2#bf1d471, uglify-js@mishoo/UglifyJS2#bf1d471:
+uglify-es@^3.3.4, uglify-es@mishoo/UglifyJS2#harmony:
   version "3.3.10"
-  resolved "https://codeload.github.com/mishoo/UglifyJS2/tar.gz/bf1d47180c87462b1605157eb15b31c9db2c1249"
+  resolved "https://codeload.github.com/mishoo/UglifyJS2/tar.gz/569757d14dbbe04f66af65d7bf0600b3a75efd96"
   dependencies:
     commander "~2.14.1"
     source-map "~0.6.1"
@@ -4987,6 +4987,13 @@ uglify-js@^2.8.29:
     yargs "~3.10.0"
   optionalDependencies:
     uglify-to-browserify "~1.0.0"
+
+uglify-js@mishoo/UglifyJS2#bf1d471:
+  version "3.3.10"
+  resolved "https://codeload.github.com/mishoo/UglifyJS2/tar.gz/bf1d47180c87462b1605157eb15b31c9db2c1249"
+  dependencies:
+    commander "~2.14.1"
+    source-map "~0.6.1"
 
 uglify-to-browserify@~1.0.0:
   version "1.0.2"
