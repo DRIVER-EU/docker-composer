@@ -12,7 +12,7 @@
   <v-dialog v-model="dialog">
     <v-card>
       <v-card-title>
-        <span>Docker-compose file</span>
+        <h3>Your docker-compose.yml is ready</h3>
         <v-spacer></v-spacer>
         <v-menu bottom left>
           <v-btn icon slot="activator">
@@ -20,6 +20,8 @@
           </v-btn>
           <v-list>
             <v-list-tile>
+              <v-btn flat href="https://docs.docker.com/install/" target="_blank">Install Docker</v-btn>
+              <v-btn flat href="https://github.com/DRIVER-EU/test-bed/tree/master/docker" target="_blank">Info</v-btn>
               <v-btn flat v-bind:href="url" download="docker-compose.yml">Download</v-btn>
             </v-list-tile>
             <!-- <v-list-tile v-for="(item, i) in items" :key="i" @click="">
@@ -29,21 +31,25 @@
         </v-menu>
       </v-card-title>
       <v-card-text>
-        <h3>Update your etc/hosts file</h3>
+        <p>
+          After installing <a target="_blank" href="https://docs.docker.com/install/">Docker</a> you, can run your docker-compose.yml file using <code>docker-compose up -d</code>.
+          For more information, see <a target="_blank" href="https://github.com/DRIVER-EU/test-bed/tree/master/docker">here</a>.
+        </p>
         <v-text-field
           name="input-1"
           label="docker-compose.yml"
           id="yaml"
           :multi-line="true"
           :readonly="true"
-          rows="20"
+          rows="15"
           v-model="yaml"
         ></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-btn color="primary" flat @click.stop="dialog = false">Cancel</v-btn>
+        <v-btn color="primary" flat href="https://docs.docker.com/install/" target="_blank">Install Docker</v-btn>
+        <v-btn color="primary" flat href="https://github.com/DRIVER-EU/test-bed/tree/master/docker" target="_blank">Info</v-btn>
         <v-btn color="primary" flat v-bind:href="url" download="docker-compose.yml">Download</v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </div>
