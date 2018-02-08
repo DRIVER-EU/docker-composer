@@ -64,7 +64,7 @@ export default class Compose extends Vue {
       services[key] = state.config.services[key];
     }
     const dockerFile = {
-      version: '2',
+      version: '3',
       services: services
     };
     this.yaml = applyParameters(YAML.stringify(dockerFile, 5, 2));
