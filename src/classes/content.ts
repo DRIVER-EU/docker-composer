@@ -41,37 +41,67 @@ export interface IContentVM extends IContent {
 }
 
 export class ContentVM implements IContentVM {
-  public id?: string;
-  public title?: string;
-  public description?: string;
-  public logo?: string;
-  public website?: string;
-  // tslint:disable-next-line:variable-name
-  public depends_on?: string[];
-  public services?: string[];
-  public parameters?: { [key: string]: string };
-  public isSelected = false;
-  public isSelectedByUser = false;
-  public showParameters = false;
-  public dependents: string[] = [];
+  constructor(private content: IContentVM) {
+    this.content.dependents = [];
+  }
 
-  constructor(content: IContent) {
-    this.id = content.id;
-    this.title = content.title;
-    this.description = content.description;
-    this.logo = content.logo;
-    this.website = content.id;
-    this.depends_on = content.depends_on;
-    this.services = content.services;
-    this.parameters = content.parameters;
+  public get id() {
+    return this.content.id;
+  }
+  public get title() {
+    return this.content.title;
+  }
+  public get description() {
+    return this.content.description;
+  }
+  public get logo() {
+    return this.content.logo;
+  }
+  public get website() {
+    return this.content.website;
+  }
+  public get depends_on() {
+    return this.content.depends_on;
+  }
+  public get services() {
+    return this.content.services;
+  }
+  public get parameters() {
+    return this.content.parameters;
+  }
+  public get isSelected() {
+    return this.content.isSelected;
+  }
+  public set isSelected(val: boolean) {
+    this.content.isSelected = val;
+  }
+  public get isSelectedByUser() {
+    return this.content.isSelectedByUser;
+  }
+  public set isSelectedByUser(val: boolean) {
+    this.content.isSelectedByUser = val;
+  }
+  public get showParameters() {
+    return this.content.showParameters;
+  }
+  public set showParameters(val: boolean) {
+    this.content.showParameters = val;
+  }
+  public get dependents() {
+    return this.content.dependents;
+  }
+  public set dependents(val: string[]) {
+    this.content.dependents = val;
   }
 
   @Watch('isSelectedByUser')
   public get isDisabled() {
     return (
-      typeof this.services === 'undefined' ||
-      this.services.length === 0 ||
-      (this.isSelected && !this.isSelectedByUser)
+      typeof this.services === 'undefined' || this.services.length === 0 || (this.isSelected && !this.isSelectedByUser)
     );
+  }
+
+  public get unavailable() {
+    return typeof this.services === 'undefined' || this.services.length === 0;
   }
 }
