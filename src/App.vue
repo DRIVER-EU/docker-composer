@@ -3,39 +3,39 @@
 </template>
 
 <script>
-import * as cs from "@csnext/cs-client";
+import * as cs from '@csnext/cs-client';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     csapp: cs.csapp
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      msg: 'Welcome to Your Vue.js App'
     };
   }
 };
 
 this.app = cs.AppState.Instance;
 this.app.project = {
-  title: "VAA FLEX",
+  title: 'VAA FLEX',
   navigation: {
-    style: "top"
+    style: 'top'
   },
   left: {
     open: false,
-    title: "Dashboards"
+    title: 'Dashboards'
   },
   footer: {
     enabled: true,
-    text: "Test footer"
+    text: 'Test footer'
   },
   dashboards: [
     {
-      path: "/",
-      manager: "single",
-      title: "Home",
+      path: '/',
+      manager: 'single',
+      title: 'Home',
       widgets: [{ component: null }]
     }
   ]
@@ -46,7 +46,7 @@ this.app.Init();
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

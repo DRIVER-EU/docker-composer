@@ -70,7 +70,7 @@ app.project = {
     }
   },
   footer: {
-    enabled: false,
+    visible: false,
     text: 'Test footer'
   },
   dashboards: [{

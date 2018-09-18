@@ -3,5 +3,5 @@ export interface IService {
   image: string;
   hostname: string;
   ports: string[];
-  environment: { [key: string]: string }
+  environment: { [key: string]: string };
 }

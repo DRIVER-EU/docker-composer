@@ -5,8 +5,8 @@ import { DatasourceManager } from '@csnext/cs-client';
 export class YamlDatasourceProcessor implements IDatasourceProcessor {
   public id = 'yaml';
 
-  public execute(ds: IDatasource, action?: ProcessorActions, data: string = '') {
-    return new Promise<Object>((resolve, reject) => {
+  public execute({}, ds: IDatasource, action?: ProcessorActions, data: string = '') {
+    return new Promise<object>((resolve, reject) => {
       if (ds.source === undefined) { return reject('No source defined'); }
       const json = YAML.parse(data);
       ds.data = json;
