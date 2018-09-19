@@ -35,21 +35,21 @@
           After installing <a target="_blank" href="https://docs.docker.com/install/">Docker</a> you, can run your docker-compose.yml file using <code>docker-compose up -d</code>.
           For more information, see <a target="_blank" href="https://github.com/DRIVER-EU/test-bed/tree/master/docker">here</a>.
         </p>
-        <v-text-field
+        <v-textarea
           name="input-1"
           label="docker-compose.yml"
           id="yaml"
-          :multi-line="true"
           :readonly="true"
           rows="15"
           v-model="yaml"
-        ></v-text-field>
+        ></v-textarea>
       </v-card-text>
       <v-card-actions>
         <v-btn color="primary" flat @click.stop="dialog = false">Cancel</v-btn>
         <v-btn color="primary" flat href="https://docs.docker.com/install/" target="_blank">Install Docker</v-btn>
         <v-btn color="primary" flat href="https://github.com/DRIVER-EU/test-bed/tree/master/docker" target="_blank">Info</v-btn>
         <v-btn color="primary" flat v-bind:href="url" download="docker-compose.yml">Download</v-btn>
+      </v-card-actions>      
     </v-card>
   </v-dialog>
 </div>
