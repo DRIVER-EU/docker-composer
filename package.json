@@ -2,11 +2,11 @@
   "name": "docker-composer",
   "scripts": {
     "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "patch-release": "npm version patch && npm publish && git push --follow-tags",
     "minor-release": "npm version minor && npm publish && git push --follow-tags",
     "major-release": "npm version major && npm publish && git push --follow-tags",
-    "start": "webpack-dev-server --open",
     "dev": "yarn cs-dev && yarn serve",
     "cs-dev": "yarn link @csnext/cs-client && yarn link @csnext/cs-core && yarn link @csnext/vue-cli-plugin-cs",
     "cs-unlink": "yarn unlink @csnext/cs-client && yarn unlink @csnext/cs-core && yarn unlink @csnext/vue-cli-plugin-cs"
