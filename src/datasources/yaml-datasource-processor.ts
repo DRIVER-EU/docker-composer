@@ -1,18 +1,34 @@
-import { IDatasource, IDatasourceProcessor, ProcessorActions } from '@csnext/cs-core';
+import axios from 'axios';
+import {
+  IDatasource,
+  IDatasourceProcessor,
+  ProcessorActions
+} from '@csnext/cs-core';
 import * as YAML from 'yamljs';
-import { DatasourceManager } from '@csnext/cs-client';
 
 export class YamlDatasourceProcessor implements IDatasourceProcessor {
   public id = 'yaml';
+  public data: any;
 
-  public execute({}, ds: IDatasource, action?: ProcessorActions, data: string = '') {
+  constructor(public file: string) {}
+
+  public execute(
+    {},
+    ds: IDatasource,
+    action?: ProcessorActions,
+    data: string = ''
+  ) {
     return new Promise<object>((resolve, reject) => {
-      if (ds.source === undefined) { return reject('No source defined'); }
-      const json = YAML.parse(data);
-      ds.data = json;
-      resolve(json);
+      axios
+        .get(this.file)
+        .then(d => {
+          const json = YAML.parse(d.data);
+          this.data = json;
+          resolve(json);
+        })
+        .catch(e => {
+          reject('No source defined');
+        });
     });
   }
 }
-
-DatasourceManager.add(new YamlDatasourceProcessor());

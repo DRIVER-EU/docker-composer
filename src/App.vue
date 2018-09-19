@@ -1,47 +1,20 @@
 <template>
-  <csapp></csapp>
+  <div id='app'>
+    <img alt='Vue logo' src='./assets/logo.png'>
+    <HelloWorld msg='Welcome to Your Vue.js + TypeScript App'/>
+  </div>
 </template>
 
-<script>
-import * as cs from '@csnext/cs-client';
+<script lang='ts'>
+import { Component, Vue } from 'vue-property-decorator';
+import HelloWorld from './components/HelloWorld.vue';
 
-export default {
-  name: 'app',
+@Component({
   components: {
-    csapp: cs.csapp
-  },
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    };
+    HelloWorld
   }
-};
-
-this.app = cs.AppState.Instance;
-this.app.project = {
-  title: 'VAA FLEX',
-  navigation: {
-    style: 'top'
-  },
-  left: {
-    open: false,
-    title: 'Dashboards'
-  },
-  footer: {
-    enabled: true,
-    text: 'Test footer'
-  },
-  dashboards: [
-    {
-      path: '/',
-      manager: 'single',
-      title: 'Home',
-      widgets: [{ component: null }]
-    }
-  ]
-};
-
-this.app.Init();
+})
+export default class App extends Vue {}
 </script>
 
 <style>
@@ -52,24 +25,5 @@ this.app.Init();
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-
-h1,
-h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 </style>
