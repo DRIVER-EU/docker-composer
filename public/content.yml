@@ -78,6 +78,24 @@ content:
           KAFKA_CONNECT_UI_PORT: 3602
   support:
     items:
+      admin:
+        title: Admin tool
+        description: >
+          As a trial manager, you want to know that all solutions and simulators are connected and running. 
+          You furthermore want to specify the security settings, and to see their error and warning logs.
+          Finally, you want to make sure that the Test-bed is properly initialised and that everyone uses
+          the same messages. The Admin tool was created for just that purpose.
+        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
+        website: http://driver-project.eu
+        depends_on:
+          - kafka
+        services:
+          - postgres
+          - pgadmin
+          - admintool
+        parameters:
+          ADMIN_TOOL_PORT: 8090
+          PG_ADMIN_PORT: 5050
       scenario_manager:
         title: Scenario Manager
         description: >
@@ -120,17 +138,6 @@ content:
           - kafka
         parameters:
           AAR_PORT: 3720
-      admin:
-        title: Administrator Management tool
-        description: >
-          As a trial manager, you want to know that all systems are connected and running. You can use this admin
-          tool for that.
-        logo: https://avatars2.githubusercontent.com/u/16935616?s=200&v=4
-        website: http://driver-project.eu
-        depends_on:
-          - kafka
-        parameters:
-          ADMIN_MANAGER_PORT: 3730
       mit:
         title: Message injection and debugging tool
         description: >

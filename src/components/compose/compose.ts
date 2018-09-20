@@ -65,7 +65,11 @@ export default class Compose extends Vue {
     }
     const dockerFile = {
       version: '3',
-      services
+      services,
+      volumes: {
+        // TODO extract named volumes automatically instead of hardcoding
+        'postgres-data': undefined
+      }
     };
     this.yaml = applyParameters(YAML.stringify(dockerFile, 5, 2));
     const blob = new Blob(['---\n' + this.yaml], { type: 'application/text' });
